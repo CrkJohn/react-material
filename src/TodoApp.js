@@ -1,15 +1,13 @@
 import React from 'react';
 import { TodoList } from './TodoList'
 
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import  NavBar  from './NavBar'
+import NavBar from './NavBar'
 import TextField from '@material-ui/core/TextField';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import "react-datepicker/dist/react-datepicker.css";
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
-import {Login} from './component/Login'
+import { Login } from './component/Login'
 
 
 
@@ -26,17 +24,12 @@ class TodoApp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
+
   render() {
-    const LoginView = () => (
-        <Login/>
-    );
-    
-    const About = () => (
-        <div>
-            <NavBar/>
-        </div>
-    );
+
     return (
+      <div>
       <div>
         <h3>TODO 1</h3>
         <form onSubmit={this.handleSubmit}>
@@ -49,7 +42,7 @@ class TodoApp extends React.Component {
             onChange={this.handleTextChange}
             value={this.state.text}
           />
-          
+
 
           <TextField
             id="new-priority"
@@ -63,7 +56,7 @@ class TodoApp extends React.Component {
             value={this.state.priority}
           />
 
-          
+
 
           <DatePicker
             id="due-date"
@@ -73,27 +66,34 @@ class TodoApp extends React.Component {
 
           </DatePicker>
 
+          <br></br>
 
-          <Button type="submit" variant="contained" color="primary" >
-            {"Submit " + (this.state.todoList.length)}
-          </Button>
+          <br></br>
 
-
+          <center>
+            <Button type="submit" variant="contained" color="primary">
+              {"Submit " + (this.state.todoList.length)}
+            </Button>
+          </center>
         </form>
+     
         <TodoList tdList={this.state.todoList} />
-
+      </div>
+      <div>
+        <Button variant="contained" color="secondary" onClick={this.logout}  >
+          Logout
+        </Button>
+      </div>
       </div>
     );
   }
 
-  handleChange(e) {
-    this.setState({ text: document.getElementById('new-todo').value });
-    this.setState({ priority: document.getElementById('new-priority').value });
-    this.setState({
-      dueDate: new Date(document.getElementById('').value)
-    });
+  logout() {
+    //localStorage.clear();
+    console.log("aja" + localStorage);
+    localStorage.removeItem("isLoggedin");
+    window.location.reload();
   }
-
 
   handleTextChange(e) {
     this.setState({

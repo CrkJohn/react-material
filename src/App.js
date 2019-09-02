@@ -1,7 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { TodoList } from './TodoList';
 import { Login } from './component/Login'
 import TodoApp from './TodoApp';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
@@ -10,46 +8,65 @@ import NavBar from './NavBar';
 
 class App extends React.Component {
 
-  constructor(props){
-    super(props);
-  }
-
-  LoggedIn(isLoggedIn){
-    if (!isLoggedIn){
-        return  <li><Link to="/">Login</Link></li>;
-    }
-    else{
-        return <li><Link to="/todo">Todo</Link></li>;
-    }
-  }
-    
 
 
-  render(){  
+  LoggedIn(isLoggedI) {
+    const LoginView = () => (
+      <Login />
+    );
 
-    const isLoggedIn = false; 
-    return (
-      <div className="App">
-        <Router>
-          <div className="App">
-            <NavBar></NavBar>
-      
-            <br />
-            <br />
-
-            <ul>
-              {this.LoggedIn(isLoggedIn)}
-            </ul>
-
-            <div>
-              <Route exact path="/" component={Login} />
-              <Route path="/todo" component={TodoApp} />
-            </div>
-          </div>
-        </Router>
-
-
+    const About = () => (
+      <div>
+        <TodoApp />
       </div>
+    );
+    if (!isLoggedI) {
+      return (<div>
+        <ul>
+          <li><Link to="/">Login</Link></li>
+        </ul>
+        <div>
+          <Route exact path="/" component={LoginView} />
+        </div>
+      </div>);
+    }
+    else {
+      return (
+        <div>
+          <ul>
+            <li><Link to="/todo">Todo</Link></li>
+          </ul>
+          <div>
+            <Route path="/todo" component={About} />
+          </div>
+        </div>);
+    }
+  }
+
+
+
+  render() {
+    if (localStorage.getItem('isLoggedin') === undefined) {
+      localStorage.setItem('isLoggedin', false)
+    }
+    const isLoggedI = localStorage.getItem('isLoggedin')
+
+    return (
+
+      <Router>
+
+        <div className="App">
+
+          <NavBar></NavBar>
+         
+          {this.LoggedIn(isLoggedI)}
+          
+
+
+        </div>
+      </Router>
+
+
     );
   }
 }

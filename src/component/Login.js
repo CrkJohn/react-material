@@ -9,12 +9,23 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import './Login.css'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import  NavBar from '../NavBar'
 
 
     
 export class Login extends React.Component{
+    
+
+    loginSubmit(){
+        const email=document.getElementById("email").value;
+        const password=document.getElementById("password").value
+        console.log(email + " " + password)
+        if( email!=="" &&  password!==""){
+            localStorage.setItem("isLoggedin",true);
+            localStorage.setItem("mailLogged",email);
+            localStorage.setItem("passwordLogged",password);
+        }
+    }
   
 
     render(){
@@ -55,7 +66,7 @@ export class Login extends React.Component{
                                 fullWidth
                                 variant="contained"
                                 color="primary"
-                                className="submit"
+                                onClick = {this.loginSubmit}
                             >
                                 Sign in
                             </Button>
