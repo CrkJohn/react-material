@@ -4,6 +4,8 @@ import './App.css';
 import {TodoList} from './TodoList'
 import {Login} from './component/Login'
 import TodoApp from './TodoApp';
+
+
 function App() {
   const todos = [{text:"Learn React", priority:5, dueDate: new Date() },
           {text:"Learn about APIs", priority:4, dueDate: new Date(2018,8,30) },
@@ -11,9 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-    
-     </header>
+     
 
      <TodoApp> </TodoApp>
      <Login />

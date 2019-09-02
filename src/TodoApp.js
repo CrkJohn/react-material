@@ -5,7 +5,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import DatePicker from 'react-datepicker';
-import moment from 'moment'
+import moment from 'moment';
+
+import "react-datepicker/dist/react-datepicker.css";
+
 
 
 
@@ -28,7 +31,7 @@ class TodoApp extends React.Component {
           <TextField
             id="new-todo"
             label="Text"
-            margin="text"
+            margin="normal"
             onChange={this.handleChange}
             value={this.state.text}
           />
@@ -52,14 +55,17 @@ class TodoApp extends React.Component {
           <DatePicker
             id="due-date"
             placeholderText="Due date"
-            onChange={this.handleChange}
-            selected={this.state.dueDate}>
+            selected = 
+            {this.state.dueDate 
+              ? moment(this.state.dueDate, 'DD-MM-YYYY') : null}
+            onChange={this.handleChange}>
+            
           </DatePicker>
 
           <br />
           <br />
 
-          <Button variant="contained" color="primary" >
+          <Button type="submit" variant="contained" color="primary" >
             {"Submit " +this.state.todoList.length + 1}
           </Button>
 
@@ -73,7 +79,7 @@ class TodoApp extends React.Component {
     this.setState({ text: document.getElementById('new-todo').value });
     this.setState({ priority: document.getElementById('new-priority').value });
     this.setState({
-      dueDate: document.getElementById('new-dueDate').value
+      dueDate: document.getElementById('due-date').value
     });
   }
 
@@ -89,7 +95,7 @@ class TodoApp extends React.Component {
       id: Date.now()
     };
     this.setState(prevState => ({
-      todoList: prevState.tdList.concat(newItem),
+      todoList: prevState.todoList.concat(newItem),
       text: ''
     }));
   }
