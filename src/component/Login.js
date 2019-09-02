@@ -9,11 +9,24 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import './Login.css'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import  NavBar from '../NavBar'
+
 
     
 export class Login extends React.Component{
+  
 
     render(){
+        const LoginView = () => (
+            <Login/>
+        );
+        
+        const About = () => (
+            <div>
+                <NavBar/>
+            </div>
+        );
         return (    
             <React.Fragment>
                 <CssBaseline />
